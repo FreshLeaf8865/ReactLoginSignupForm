@@ -1,6 +1,6 @@
 {
   "name": "react-login-signup-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description":
     "A group of React Components for implementing Login and Signup functionality",
   "main": "lib/index.js",
