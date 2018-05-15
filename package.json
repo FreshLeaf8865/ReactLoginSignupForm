@@ -35,5 +35,9 @@
     "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   },
-  "author": "Hassan Ali Askari <hassan.ali.askari@gmail.com>"
+  "author": "Hassan Ali Askari <hassan.ali.askari@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hassanaliaskari/ReactLoginSignupForm.git"
+  }
 }
