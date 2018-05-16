@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 class LoginWrapper extends React.Component {
 
   componentDidMount() {
-    const { dispatch, loggedIn, setRedirectUrlAction } = this.props;
+    const { dispatch, isLoggedIn, setRedirectUrlAction } = this.props;
 
-    if (!loggedIn) {
+    if (!isLoggedIn) {
       dispatch(setRedirectUrlAction(this.props.history.location.pathname));
       this.props.history.push("/login");
     }
   }
 
   render() {
-    if (this.props.loggedIn) {
+    if (this.props.isLoggedIn) {
       return this.props.children
     } else {
       return null
@@ -23,7 +23,7 @@ class LoginWrapper extends React.Component {
 
 LoginWrapper.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   setRedirectUrlAction: PropTypes.func.isRequired,
 };
 

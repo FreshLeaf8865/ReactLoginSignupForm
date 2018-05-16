@@ -122,10 +122,19 @@ class LoginForm extends React.Component {
   }
 
   _renderLoginButton() {
+    const style = {
+      float: 'right',
+      marginTop: '1.5rem',
+    };
+
     return (
-      React.cloneElement(this.props.buttonElement, {
-        onClick: () => this._login()
-      })
+      <div style={style}>
+        {
+          React.cloneElement(this.props.buttonElement, {
+            onClick: () => this._login()
+          })
+        }
+      </div>
     );
   }
 

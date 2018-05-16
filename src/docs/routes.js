@@ -1,40 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom'
-import Home from './home.js';
+import FlatButton from 'material-ui/FlatButton';
+import HomePage from './home.js';
 import { login, setRedirectUrl } from './actions/loginActions.js';
-
 import { LoginWrapper, LoginForm } from '../../lib';
 
-function mapStateToPropsLogin(state, ownProps) {
+function mapStateToPropsLoginForm(state) {
   return {
-    isLoggedIn: state.login.loggedIn,
+    isLoggedIn: state.login.isLoggedIn,
     redirectUrl: state.login.redirectUrl,
   }
 }
-const ConnectedLogin = withRouter(connect(mapStateToPropsLogin)(LoginForm));
+const ConnectedLoginForm = withRouter(connect(mapStateToPropsLoginForm)(LoginForm));
 
-function mapStateToPropsContainer(state, ownProps) {
+function mapStateToPropsLoginWrapper(state) {
   return {
-    loggedIn: state.login.loggedIn,
+    isLoggedIn: state.login.isLoggedIn,
   }
 }
-const ConnectedEnsureLoggedInContainer = withRouter(connect(mapStateToPropsContainer)(LoginWrapper));
+const ConnectedLoginWrapper = withRouter(connect(mapStateToPropsLoginWrapper)(LoginWrapper));
+
+const materialButton = <FlatButton hoverColor="#2E86C1" label="LOGIN" />
 
 const routes = (
 	<div>
 		<Route path='/login' render={() =>
-			<ConnectedLogin
+			<ConnectedLoginForm
 				backgroundImageUrl="https://i.pinimg.com/originals/1e/92/d2/1e92d2809d44371f04cbc4d3d6ce22c1.jpg"
+				buttonElement={materialButton}
 				containerPosition="0.67"
 				tryLoginAction={login}
 			/>
 		} />
-		<ConnectedEnsureLoggedInContainer
+		<ConnectedLoginWrapper
 			setRedirectUrlAction={setRedirectUrl}
 		>
-			<Route path='/' component={Home} />
-		</ConnectedEnsureLoggedInContainer>
+			<Route path='/' component={HomePage} />
+		</ConnectedLoginWrapper>
 	</div>
 );
 

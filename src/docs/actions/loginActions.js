@@ -1,4 +1,4 @@
-export function loginSuccessful() {
+export function receiveLoginSuccessful() {
   return {
     type: 'RECEIVE_LOGIN_SUCCESSFUL',
   };
@@ -7,7 +7,7 @@ export function loginSuccessful() {
 export function login() {
   return dispatch => {
     setTimeout(() => {
-      dispatch(loginSuccessful());
+      dispatch(receiveLoginSuccessful());
     }, 1000);
   };
 }

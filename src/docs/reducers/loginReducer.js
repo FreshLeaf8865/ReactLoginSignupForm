@@ -1,5 +1,5 @@
 const initialState = {
-  loggedIn: false,
+  isLoggedIn: false,
   isLogging: false,
   redirectUrl: '',
 };
@@ -15,7 +15,7 @@ export default function login(state = initialState, action) {
       return {
         ...state,
         isLogging: false,
-        loggedIn: true,
+        isLoggedIn: true,
       };
     case 'SET_REDIRECT_URL':
       return {
