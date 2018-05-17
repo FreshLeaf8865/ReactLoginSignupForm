@@ -2,6 +2,10 @@
 
 A group of React Components for implementing Login and Signup functionality.
 
+## Preview
+
+![Preview Image](https://raw.githubusercontent.com/hassanaliaskari/ReactLoginSignupForm/master/docs/preview.png)
+
 ## Demo
 
 Check out the [Demo](https://hassanaliaskari.github.io/ReactLoginSignupForm/)
