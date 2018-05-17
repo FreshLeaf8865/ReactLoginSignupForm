@@ -4,7 +4,7 @@ A group of React Components for implementing Login and Signup functionality.
 
 ## Demo
 
-Check out the [Demo](https://hassanaliaskari.github.io/login)
+Check out the [Demo](https://hassanaliaskari.github.io/ReactLoginSignupForm/)
 
 
 ## Getting Started
