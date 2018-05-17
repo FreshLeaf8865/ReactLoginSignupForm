@@ -86,7 +86,7 @@ The package contains two components - LoginForm and LoginWrapper.
 ### LoginWrapper
 LoginWrapper is used to wrap the routes that can only be accessed by logged-in users.
 
-#### Required Props
+#### *Required Props*
 **dispatch** : A connection to redux store.
 
 **isLoggedIn** : A global state to indicate user login state.
@@ -96,14 +96,14 @@ LoginWrapper is used to wrap the routes that can only be accessed by logged-in u
 ### LoginForm
 LoginForm is a React Component meant to be used for the /login route.
 
-#### Required Props
+#### *Required Props*
 **isLoggedIn** : A global state to indicate user login state.
 
 **redirectUrl** : The route to return to after successful login.
 
 **tryLoginAction** : A redux action to verify login with the backend.
 
-#### Optional Props
+#### *Optional Props*
 **backgroundColor** : (String) The background color of the login page. If background image is specified, the color is hidden.
 
 **backgroundImageUrl** : (String) The background image of the login page.
