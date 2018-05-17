@@ -79,33 +79,62 @@ ReactDOM.render(
 );
 ```
 
-### Configuration
+## Configuration
 
 The package contains two components - LoginForm and LoginWrapper.
 
-#### LoginWrapper
+### LoginWrapper
 LoginWrapper is used to wrap the routes that can only be accessed by logged-in users.
 
-##### Required Props
+#### Required Props
 **dispatch** : A connection to redux store.
 
 **isLoggedIn** : A global state to indicate user login state.
 
 **setRedirectUrlAction** : A redux action to set the route to return to after successful login.
 
-#### LoginForm
+### LoginForm
 LoginForm is a React Component meant to be used for the /login route.
 
-##### Required Props
+#### Required Props
 **isLoggedIn** : A global state to indicate user login state.
 
 **redirectUrl** : The route to return to after successful login.
 
 **tryLoginAction** : A redux action to verify login with the backend.
 
-##### Optional Props
-**backgroundColor** :
+#### Optional Props
+**backgroundColor** : (String) The background color of the login page. If background image is specified, the color is hidden.
 
+**backgroundImageUrl** : (String) The background image of the login page.
+
+**backgroundRepeat** : (Boolean) Specifies if background image should be repeated.
+
+**backgroundSize** : (String) Specifies CSS property background-size.
+
+**backgroundStyle** : (Object) Overrides login page background with custom styles.
+
+**buttonElement** : (React Component) Custom Component to be used as buttons.
+
+**containerColor** : (String) The background color of the container containing the form.
+
+**containerPosition** : (Number) A number between 0 and 1 to specify the horizontal position of the container. 0.5 places the container in the middle. The container is always centered vertically.
+
+**containerStyle** : (Object) Overrides container styles.
+
+**inputBorderColor** : (String) The border color of the input elements used in the form.
+
+**inputBorderFocusedColor** : (String) The border color of the input elements when clicked.
+
+**inputElement** : (React Component) Custom Component to be used as the input element.
+
+**inputFontColor** : (String) Color of the input.
+
+**inputHintColor** : (String) Color of the hints used in the input element.
+
+**inputHintFocusedColor** : (String) Color of the hints used in the input element when clicked.
+
+**inputWidth** : (String) Width of the input element (including units e.g. px, rem).
 
 ## License
 
