@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 let wrapperStyle = {
   position: 'relative',
-  marginTop: '1.5rem',
+  marginTop: '1rem',
 };
 
 var inputStyle = {

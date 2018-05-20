@@ -32,12 +32,21 @@ let loginButtonStyle = {
   transition: 'background 0.8s',
 };
 
+let errorStyle = {
+  fontSize: '0.875rem',
+  height: '1rem',
+  color: '#CC2C21',
+  fontStyle: 'italic',
+}
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
+      usernameError: '',
+      passwordError: '',
     };
   }
 
@@ -51,8 +60,30 @@ class LoginForm extends React.Component {
     }
   }
 
+  _resetError() {
+    this.setState({ usernameError: '', passwordError: '' });
+  }
+
+  _isInputValid() {
+    this._resetError();
+    let isValid = true;
+
+    if (this.state.username === '') {
+      this.setState({ usernameError: 'Username cannot be empty' });
+      isValid = false;
+    }
+    if (this.state.password === '') {
+      this.setState({ passwordError: 'Password cannot be empty' });
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
   _login() {
-    this.props.dispatch(this.props.tryLoginAction());
+    if (this._isInputValid()) {
+      this.props.dispatch(this.props.tryLoginAction());
+    }
   }
 
   _onUsernameChange(val) {
@@ -104,20 +135,34 @@ class LoginForm extends React.Component {
 
   _renderUsernameInput() {
     return (
-      React.cloneElement(this.props.inputElement, {
-        onChange: (val) => this._onUsernameChange(val),
-        value: this.state.username,
-      })
+      <div>
+        {
+          React.cloneElement(this.props.inputElement, {
+            onChange: (val) => this._onUsernameChange(val),
+            value: this.state.username,
+          })
+        }
+        <div style={errorStyle}>
+          {this.state.usernameError}
+        </div>
+      </div>
     );
   }
 
   _renderPasswordInput() {
     return (
-      React.cloneElement(this.props.inputElement, {
-        onChange: (val) => this.onPasswordChange(val),
-        value: this.state.password,
-        isPassword: true,
-      })
+      <div>
+        {
+          React.cloneElement(this.props.inputElement, {
+            onChange: (val) => this.onPasswordChange(val),
+            value: this.state.password,
+            isPassword: true,
+          })
+        }
+        <div style={errorStyle}>
+          {this.state.passwordError}
+        </div>
+      </div>
     );
   }
 
@@ -162,6 +207,9 @@ class LoginForm extends React.Component {
                     value={this.state.username}
                     width={this.props.inputWidth}
                   />
+                  <div style={errorStyle}>
+                    {this.state.usernameError}
+                  </div>
                   <Input
                     borderColor={this.props.inputBorderColor}
                     borderFocusedColor={this.props.inputBorderFocusedColor}
@@ -174,6 +222,9 @@ class LoginForm extends React.Component {
                     value={this.state.password}
                     width={this.props.inputWidth}
                   />
+                  <div style={errorStyle}>
+                    {this.state.passwordError}
+                  </div>
                 </div>
               )
             }
