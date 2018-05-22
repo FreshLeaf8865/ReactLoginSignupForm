@@ -34,7 +34,7 @@ let loginButtonStyle = {
 
 let errorStyle = {
   fontSize: '0.875rem',
-  height: '1rem',
+  height: '0.875rem',
   color: '#CC2C21',
   fontStyle: 'italic',
 }
@@ -127,9 +127,26 @@ class LoginForm extends React.Component {
       }
     }
 
-    //Button Styles
+    // Button Styles
     if (this.props.buttonColor !== null) {
       loginButtonStyle.color = this.props.buttonColor;
+    }
+
+    // Error message Styles
+    if (this.props.errorStyle !== null) {
+      errorStyle = this.props.errorStyle;
+      errorStyle.height = this.props.errorStyle.fontSize || '1rem';
+    } else {
+      if (this.props.errorFontColor !== null) {
+        errorStyle.color = this.props.errorFontColor;
+      }
+      if (this.props.errorFontSize !== null) {
+        errorStyle.fontSize = this.props.errorFontSize;
+        errorStyle.height = this.props.errorFontSize;
+      }
+      if (this.props.errorFontStyle !== null) {
+        errorStyle.fontStyle = this.props.errorFontStyle;
+      }
     }
   }
 
@@ -257,6 +274,10 @@ LoginForm.propTypes = {
   containerColor: PropTypes.string,
   containerPosition: PropTypes.number,
   containerStyle: PropTypes.object,
+  errorFontColor: PropTypes.string,
+  errorFontSize: PropTypes.string,
+  errorFontStyle: PropTypes.string,
+  errorStyle: PropTypes.object,
   inputBorderColor: PropTypes.string,
   inputBorderFocusedColor: PropTypes.string,
   inputElement: PropTypes.node,
@@ -279,6 +300,10 @@ LoginForm.defaultProps = {
   containerColor: null,
   containerPosition: null,
   containerStyle: null,
+  errorFontColor: null,
+  errorFontSize: null,
+  errorFontStyle: null,
+  errorStyle: null,
   inputBorderColor: null,
   inputBorderFocusedColor: null,
   inputElement: null,

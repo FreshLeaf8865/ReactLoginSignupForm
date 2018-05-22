@@ -126,11 +126,35 @@ LoginForm is a React Component meant to be used for the /login route.
 
 **containerStyle** : (Object) Overrides container styles.
 
+**errorFontColor** : (String) Color of the error message.
+
+**errorFontSize** : (String) Font size for the error messages (including units e.g. px, rem).
+
+**errorFontStyle** : (String) Specifies CSS property font-style.
+
+**errorStyle** : (Object) Overrides error message styles.
+
 **inputBorderColor** : (String) The border color of the input elements used in the form.
 
 **inputBorderFocusedColor** : (String) The border color of the input elements when clicked.
 
-**inputElement** : (React Component) Custom Component to be used as the input element.
+**inputElement** : (React Component) Custom Component to be used as the input element. Needs to have the following props:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **onChange(val)** : A function called when the input of the element changes.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **value** : The current value of the user input.
+A minimal custom input element would look like -
+
+```
+class CustomInput extends React.Component {
+  render() {
+    return (
+      <input
+        onChange={(event) => this.props.onChange(event.target.value)}
+        value={this.props.value}
+      />
+    );
+  }
+}
+```
 
 **inputFontColor** : (String) Color of the input.
 
