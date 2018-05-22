@@ -139,7 +139,9 @@ LoginForm is a React Component meant to be used for the /login route.
 **inputBorderFocusedColor** : (String) The border color of the input elements when clicked.
 
 **inputElement** : (React Component) Custom Component to be used as the input element. Needs to have the following props:
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **onChange(val)** : A function called when the input of the element changes.
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **value** : The current value of the user input.
 A minimal custom input element would look like -
 
