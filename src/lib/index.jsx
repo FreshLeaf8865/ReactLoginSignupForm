@@ -1,7 +1,7 @@
 import LoginWrapper from './loginWrapper.js';
-import LoginForm from './loginForm.js'
+import LoginSignupForm from './loginSignupForm.js'
 
 export {
 	LoginWrapper,
-	LoginForm,
+	LoginSignupForm,
 }

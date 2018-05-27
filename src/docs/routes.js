@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton';
 import HomePage from './home.js';
-import { login, setRedirectUrl } from './actions/loginActions.js';
-import { LoginWrapper, LoginForm } from '../../lib';
+import { login, setRedirectUrl, signup } from './actions/loginActions.js';
+import { LoginWrapper, LoginSignupForm } from '../../lib';
 // import CustomInput from './customInput.js';
 
-function mapStateToPropsLoginForm(state) {
+function mapStateToPropsForm(state) {
   return {
     isLoggedIn: state.login.isLoggedIn,
     redirectUrl: state.login.redirectUrl,
   }
 }
-const ConnectedLoginForm = withRouter(connect(mapStateToPropsLoginForm)(LoginForm));
+const ConnectedForm = withRouter(connect(mapStateToPropsForm)(LoginSignupForm));
 
 function mapStateToPropsLoginWrapper(state) {
   return {
@@ -22,17 +22,20 @@ function mapStateToPropsLoginWrapper(state) {
 }
 const ConnectedLoginWrapper = withRouter(connect(mapStateToPropsLoginWrapper)(LoginWrapper));
 
-const materialButton = <FlatButton hoverColor="#2E86C1" label="LOGIN" />
+const loginButton = <FlatButton hoverColor="#2E86C1" label="LOGIN" />
+const signupButton = <FlatButton hoverColor="#2E86C1" label="SIGNUP" />
 
 const routes = (
   <div>
     <Route path='/login' render={() =>
-      <ConnectedLoginForm
+      <ConnectedForm
         backgroundImageUrl="https://i.pinimg.com/originals/1e/92/d2/1e92d2809d44371f04cbc4d3d6ce22c1.jpg"
-        buttonElement={materialButton}
+        buttonElement={loginButton}
         containerPosition="0.67"
         // inputElement={<CustomInput />}
+        signupButton={signupButton}
         tryLoginAction={login}
+        trySignupAction={signup}
       />
     } />
     <ConnectedLoginWrapper

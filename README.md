@@ -24,17 +24,17 @@ npm install react-login-signup-form
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom'
-import { LoginWrapper, LoginForm } from 'react-login-signup-form';
-import { login, setRedirectUrl } from './actions/loginActions.js';
+import { LoginWrapper, LoginSignupForm } from 'react-login-signup-form';
+import { login, setRedirectUrl, signup } from './actions/loginActions.js';
 import HomePage from './home.js';
 
-function mapStateToPropsLoginForm(state) {
+function mapStateToPropsForm(state) {
   return {
     isLoggedIn: state.login.isLoggedIn,
     redirectUrl: state.login.redirectUrl,
   }
 }
-const ConnectedLoginForm = withRouter(connect(mapStateToPropsLoginForm)(LoginForm));
+const ConnectedForm = withRouter(connect(mapStateToPropsForm)(LoginSignupForm));
 
 function mapStateToPropsLoginWrapper(state) {
   return {
@@ -46,10 +46,11 @@ const ConnectedLoginWrapper = withRouter(connect(mapStateToPropsLoginWrapper)(Lo
 const routes = (
   <div>
     <Route path='/login' render={() =>
-      <ConnectedLoginForm
+      <ConnectedForm
         backgroundImageUrl="https://i.pinimg.com/originals/1e/92/d2/1e92d2809d44371f04cbc4d3d6ce22c1.jpg"
         containerPosition="0.67"
         tryLoginAction={login}
+        trySignupAction={signup}
       />
     } />
     <ConnectedLoginWrapper
@@ -97,7 +98,7 @@ LoginWrapper is used to wrap the routes that can only be accessed by logged-in u
 
 **setRedirectUrlAction** : A redux action to set the route to return to after successful login.
 
-### LoginForm
+### LoginSignupForm
 LoginForm is a React Component meant to be used for the /login route.
 
 #### *Required Props*
@@ -106,6 +107,8 @@ LoginForm is a React Component meant to be used for the /login route.
 **redirectUrl** : The route to return to after successful login.
 
 **tryLoginAction** : A redux action to verify login with the backend.
+
+**trySignupAction** : A redux action to verify signup with the backend.
 
 #### *Optional Props*
 **backgroundColor** : (String) The background color of the login page. If background image is specified, the color is hidden.
@@ -118,7 +121,7 @@ LoginForm is a React Component meant to be used for the /login route.
 
 **backgroundStyle** : (Object) Overrides login page background with custom styles.
 
-**buttonElement** : (React Component) Custom Component to be used as buttons.
+**loginButton** : (React Component) Custom Component to be used as the Login button.
 
 **containerColor** : (String) The background color of the container containing the form.
 
@@ -165,6 +168,8 @@ class CustomInput extends React.Component {
 **inputHintFocusedColor** : (String) Color of the hints used in the input element when clicked.
 
 **inputWidth** : (String) Width of the input element (including units e.g. px, rem).
+
+**signupButton** : (React Component) Custom Component to be used as the Signup button.
 
 ## License
 

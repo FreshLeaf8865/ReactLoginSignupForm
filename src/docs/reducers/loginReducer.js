@@ -17,6 +17,12 @@ export default function login(state = initialState, action) {
         isLogging: false,
         isLoggedIn: true,
       };
+    case 'RECEIVE_SIGNUP_SUCCESSFUL':
+      return {
+        ...state,
+        isLogging: false,
+        isLoggedIn: true,
+      };
     case 'SET_REDIRECT_URL':
       return {
         ...state,

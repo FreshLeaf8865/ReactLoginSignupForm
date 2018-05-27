@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Input from './input.js';
 
-let buttonStyle1 = {
+let buttonStyle = {
   float: 'right',
   cursor: 'pointer',
   marginTop: '1rem',
@@ -20,14 +20,16 @@ let errorStyle = {
   fontStyle: 'italic',
 }
 
-class LoginForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
-      usernameError: '',
+      confirmPassword: '',
+      emailError: '',
       passwordError: '',
+      confirmPasswordError: '',
     };
   }
 
@@ -35,48 +37,70 @@ class LoginForm extends React.Component {
     this._updateStyles();
   }
 
+  // From https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+  _isEmailValid(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
   _resetError() {
-    this.setState({ usernameError: '', passwordError: '' });
+    this.setState({ emailError: '', passwordError: '', confirmPasswordError: '' });
   }
 
   _isInputValid() {
     this._resetError();
     let isValid = true;
 
-    if (this.state.username === '') {
-      this.setState({ usernameError: 'Username cannot be empty' });
+    if (this.state.email === '') {
+      this.setState({ emailError: 'Email cannot be empty' });
+      isValid = false;
+    } else if (!this._isEmailValid(this.state.email)) {
+      this.setState({ emailError: 'Email not valid' });
       isValid = false;
     }
+
     if (this.state.password === '') {
       this.setState({ passwordError: 'Password cannot be empty' });
+      isValid = false;
+    }
+
+    if (this.state.confirmPassword === '') {
+      this.setState({ confirmPasswordError: 'Password cannot be empty' });
+      isValid = false;
+    } else if (this.state.confirmPassword !== this.state.password) {
+      this.setState({ confirmPasswordError: 'Passwords must match' });
       isValid = false;
     }
 
     return isValid;
   }
 
-  _login() {
+  _openLoginForm() {
+    this.props.openLoginForm();
+  }
+
+  _signup() {
     if (this._isInputValid()) {
-      this.props.login();
+      this.props.signup();
     }
   }
 
-  _openSignupForm() {
-    this.props.openSignupForm();
-  }
-
-  _onUsernameChange(val) {
-    this.setState({ username: val });
+  _onEmailChange(val) {
+    this.setState({ email: val });
   }
 
   onPasswordChange(val) {
     this.setState({ password: val });
   }
 
+  onConfirmPasswordChange(val) {
+    this.setState({ confirmPassword: val });
+  }
+
   _updateStyles() {
     // Button Styles
     if (this.props.buttonColor !== null) {
-      buttonStyle1.color = this.props.buttonColor;
+      buttonStyle.color = this.props.buttonColor;
     }
 
     // Error message Styles
@@ -97,17 +121,17 @@ class LoginForm extends React.Component {
     }
   }
 
-  _renderUsernameInput() {
+  _renderEmailInput() {
     return (
       <div>
         {
           React.cloneElement(this.props.inputElement, {
-            onChange: (val) => this._onUsernameChange(val),
-            value: this.state.username,
+            onChange: (val) => this._onEmailChange(val),
+            value: this.state.email,
           })
         }
         <div style={errorStyle}>
-          {this.state.usernameError}
+          {this.state.emailError}
         </div>
       </div>
     );
@@ -130,24 +154,24 @@ class LoginForm extends React.Component {
     );
   }
 
-  _renderLoginButton() {
-    const style = {
-      float: 'right',
-      marginTop: '1rem',
-    };
-
+  _renderConfirmPasswordInput() {
     return (
-      <div style={style}>
+      <div>
         {
-          React.cloneElement(this.props.loginButton, {
-            onClick: () => this._login()
+          React.cloneElement(this.props.inputElement, {
+            onChange: (val) => this.onConfirmPasswordChange(val),
+            value: this.state.confirmPassword,
+            isPassword: true,
           })
         }
+        <div style={errorStyle}>
+          {this.state.confirmPasswordError}
+        </div>
       </div>
     );
   }
 
-  _renderSignupButton() {
+  _renderLoginButton() {
     const style = {
       float: 'left',
       marginTop: '1rem',
@@ -156,8 +180,25 @@ class LoginForm extends React.Component {
     return (
       <div style={style}>
         {
+          React.cloneElement(this.props.loginButton, {
+            onClick: () => this._openLoginForm()
+          })
+        }
+      </div>
+    );
+  }
+
+  _renderSignupButton() {
+    const style = {
+      float: 'right',
+      marginTop: '1rem',
+    };
+
+    return (
+      <div style={style}>
+        {
           React.cloneElement(this.props.signupButton, {
-            onClick: () => this._openSignupForm()
+            onClick: () => this._signup()
           })
         }
       </div>
@@ -170,8 +211,9 @@ class LoginForm extends React.Component {
         {
           this.props.inputElement ? (
             <div>
-              {this._renderUsernameInput()}
+              {this._renderEmailInput()}
               {this._renderPasswordInput()}
+              {this._renderConfirmPasswordInput()}
             </div>
           ) : (
             <div>
@@ -181,13 +223,13 @@ class LoginForm extends React.Component {
                 fontColor={this.props.inputFontColor}
                 hintColor={this.props.inputHintColor}
                 hintFocusedColor={this.props.inputHintFocusedColor}
-                hintText="Username"
-                onChange={(val) => this._onUsernameChange(val)}
-                value={this.state.username}
+                hintText="Email"
+                onChange={(val) => this._onEmailChange(val)}
+                value={this.state.email}
                 width={this.props.inputWidth}
               />
               <div style={errorStyle}>
-                {this.state.usernameError}
+                {this.state.emailError}
               </div>
               <Input
                 borderColor={this.props.inputBorderColor}
@@ -204,6 +246,21 @@ class LoginForm extends React.Component {
               <div style={errorStyle}>
                 {this.state.passwordError}
               </div>
+              <Input
+                borderColor={this.props.inputBorderColor}
+                borderFocusedColor={this.props.inputBorderFocusedColor}
+                fontColor={this.props.inputFontColor}
+                hintColor={this.props.inputHintColor}
+                hintFocusedColor={this.props.inputHintFocusedColor}
+                hintText="Confirm Password"
+                isPassword={true}
+                onChange={(val) => this.onConfirmPasswordChange(val)}
+                value={this.state.confirmPassword}
+                width={this.props.inputWidth}
+              />
+              <div style={errorStyle}>
+                {this.state.confirmPasswordError}
+              </div>
             </div>
           )
         }
@@ -213,8 +270,8 @@ class LoginForm extends React.Component {
             this._renderLoginButton()
           ) : (
             <div
-              onClick={() => this._login()}
-              style={buttonStyle1}
+              onClick={() => this._openLoginForm()}
+              style={{ ...buttonStyle, float: 'left' }}
             >
               LOGIN
             </div>
@@ -227,7 +284,7 @@ class LoginForm extends React.Component {
           ) : (
             <div
               onClick={() => this._openSignupForm()}
-              style={{ ...buttonStyle1, float: 'left' }}
+              style={buttonStyle}
             >
               SIGNUP
             </div>
@@ -238,7 +295,7 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = {
+SignupForm.propTypes = {
   loginButton: PropTypes.node,
   errorFontColor: PropTypes.string,
   errorFontSize: PropTypes.string,
@@ -251,12 +308,12 @@ LoginForm.propTypes = {
   inputHintColor: PropTypes.string,
   inputHintFocusedColor: PropTypes.string,
   inputWidth: PropTypes.string,
-  login: PropTypes.func.isRequired,
-  openSignupForm: PropTypes.func.isRequired,
+  openLoginForm: PropTypes.func.isRequired,
+  signup: PropTypes.func.isRequired,
   signupButton: PropTypes.node,
 };
 
-LoginForm.defaultProps = {
+SignupForm.defaultProps = {
   loginButton: null,
   errorFontColor: null,
   errorFontSize: null,
@@ -272,4 +329,4 @@ LoginForm.defaultProps = {
   signupButton: null,
 };
 
-export default LoginForm;
+export default SignupForm;
