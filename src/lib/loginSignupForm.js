@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Loader from './loader.js';
 import LoginForm from './loginForm.js';
 import SignupForm from './signupForm.js';
 
@@ -93,6 +94,10 @@ class LoginSignupForm extends React.Component {
   render() {
     return (
       <div>
+        <Loader
+          loading={this.props.isLoading}
+        />
+
         <div style={backgroundStyle}>
           <div style={containerStyle}>
             {
@@ -162,6 +167,7 @@ LoginSignupForm.propTypes = {
   inputHintColor: PropTypes.string,
   inputHintFocusedColor: PropTypes.string,
   inputWidth: PropTypes.string,
+  isLoading: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   redirectUrl: PropTypes.string.isRequired,
   signupButton: PropTypes.node,

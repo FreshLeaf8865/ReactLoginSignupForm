@@ -9,6 +9,7 @@ import { LoginWrapper, LoginSignupForm } from '../../lib';
 
 function mapStateToPropsForm(state) {
   return {
+    isLoading: state.login.isLoading,
     isLoggedIn: state.login.isLoggedIn,
     redirectUrl: state.login.redirectUrl,
   }

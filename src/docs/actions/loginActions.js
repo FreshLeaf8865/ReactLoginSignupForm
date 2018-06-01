@@ -1,10 +1,22 @@
-export function receiveLoginSuccessful() {
+function requestLogin() {
+  return {
+    type: 'REQUEST_LOGIN',
+  };
+}
+
+function receiveLoginSuccessful() {
   return {
     type: 'RECEIVE_LOGIN_SUCCESSFUL',
   };
 }
 
-export function receiveSignupSuccessful() {
+function requestSignup() {
+  return {
+    type: 'REQUEST_SIGNUP',
+  };
+}
+
+function receiveSignupSuccessful() {
   return {
     type: 'RECEIVE_SIGNUP_SUCCESSFUL',
   };
@@ -12,6 +24,7 @@ export function receiveSignupSuccessful() {
 
 export function login() {
   return dispatch => {
+    dispatch(requestLogin());
     setTimeout(() => {
       dispatch(receiveLoginSuccessful());
     }, 1000);
@@ -27,6 +40,7 @@ export function setRedirectUrl(url) {
 
 export function signup() {
   return dispatch => {
+    dispatch(requestSignup());
     setTimeout(() => {
       dispatch(receiveSignupSuccessful());
     }, 2000);

@@ -30,6 +30,7 @@ import HomePage from './home.js';
 
 function mapStateToPropsForm(state) {
   return {
+    isLoading: state.login.isLoading,
     isLoggedIn: state.login.isLoggedIn,
     redirectUrl: state.login.redirectUrl,
   }
@@ -102,6 +103,8 @@ LoginWrapper is used to wrap the routes that can only be accessed by logged-in u
 LoginForm is a React Component meant to be used for the /login route.
 
 #### *Required Props*
+**isLoading** : A global state to indicate that the app is communicating to the backend.
+
 **isLoggedIn** : A global state to indicate user login state.
 
 **redirectUrl** : The route to return to after successful login.

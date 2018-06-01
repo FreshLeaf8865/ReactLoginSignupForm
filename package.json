@@ -1,8 +1,7 @@
 {
   "name": "react-login-signup-form",
-  "version": "1.0.5",
-  "description":
-    "A group of React Components for implementing Login and Signup functionality",
+  "version": "1.0.6",
+  "description": "A group of React Components for implementing Login and Signup functionality",
   "main": "lib/index.js",
   "scripts": {
     "dev": "concurrently \"npm run lib:watch\" \"npm run docs\"",
@@ -11,7 +10,12 @@
     "docs": "webpack-dev-server --mode development",
     "docs:prod": "webpack --mode production"
   },
-  "keywords": ["React", "login", "signup", "signin"],
+  "keywords": [
+    "React",
+    "login",
+    "signup",
+    "signin"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "react": "^15.3.0 || ^16.2.0",
@@ -39,5 +43,8 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:hassanaliaskari/ReactLoginSignupForm.git"
+  },
+  "dependencies": {
+    "emotion": "^9.1.3"
   }
 }
