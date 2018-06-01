@@ -41,16 +41,16 @@ class LoginSignupForm extends React.Component {
     }
   }
 
-  _login = () => {
-    this.props.dispatch(this.props.tryLoginAction());
+  _login = (username, password) => {
+    this.props.dispatch(this.props.tryLoginAction(username, password));
   }
 
   _openLoginForm = () => {
     this.setState({ showSignupForm: false });
   }
 
-  _signup = () => {
-    this.props.dispatch(this.props.trySignupAction());
+  _signup = (email, password) => {
+    this.props.dispatch(this.props.trySignupAction(email, password));
   }
 
   _openSignupForm = () => {

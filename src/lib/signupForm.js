@@ -81,7 +81,8 @@ class SignupForm extends React.Component {
 
   _signup() {
     if (this._isInputValid()) {
-      this.props.signup();
+      const { email, password } = this.state;
+      this.props.signup(email, password);
     }
   }
 

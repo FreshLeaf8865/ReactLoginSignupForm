@@ -57,7 +57,8 @@ class LoginForm extends React.Component {
 
   _login() {
     if (this._isInputValid()) {
-      this.props.login();
+      const { username, password } = this.state;
+      this.props.login(username, password);
     }
   }
 

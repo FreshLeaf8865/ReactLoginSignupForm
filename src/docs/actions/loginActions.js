@@ -22,7 +22,7 @@ function receiveSignupSuccessful() {
   };
 }
 
-export function login() {
+export function login(username, password) {
   return dispatch => {
     dispatch(requestLogin());
     setTimeout(() => {
@@ -38,7 +38,7 @@ export function setRedirectUrl(url) {
   }
 }
 
-export function signup() {
+export function signup(email, password) {
   return dispatch => {
     dispatch(requestSignup());
     setTimeout(() => {

@@ -109,9 +109,9 @@ LoginForm is a React Component meant to be used for the /login route.
 
 **redirectUrl** : The route to return to after successful login.
 
-**tryLoginAction** : A redux action to verify login with the backend.
+**tryLoginAction** : A redux action to verify login with the backend. Function Parameters: (username, password)
 
-**trySignupAction** : A redux action to verify signup with the backend.
+**trySignupAction** : A redux action to verify signup with the backend. Function Parameters: (email, password)
 
 #### *Optional Props*
 **backgroundColor** : (String) The background color of the login page. If background image is specified, the color is hidden.
